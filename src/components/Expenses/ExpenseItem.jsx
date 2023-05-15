@@ -1,7 +1,7 @@
 import ExpenseDate from "./ExpenseDate";
 import "./ExpenseItem.css";
 import Card from "../UI/Card";
-function ExpenseItem({ title, date, amount }) {
+const ExpenseItem = ({ title, date, amount }) => {
   console.log(title);
   return (
     <Card className="expense-item">
@@ -12,6 +12,6 @@ function ExpenseItem({ title, date, amount }) {
       </div>
     </Card>
   );
-}
+};
 
 export default ExpenseItem;
