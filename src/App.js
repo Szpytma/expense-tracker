@@ -28,6 +28,7 @@ const App = () => {
   const addExpenseHandler = (expense) => {
     setCurrentData([expense, ...currentData]);
   };
+
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />

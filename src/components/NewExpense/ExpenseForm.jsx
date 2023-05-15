@@ -3,7 +3,7 @@ import "./ExpenseForm.css";
 const ExpenseForm = ({ onSaveExpenseData }) => {
   const todayDate = new Date().toISOString().split("T")[0];
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAmount, setEnteredAmount] = useState(0);
+  const [enteredAmount, setEnteredAmount] = useState(0.01);
   const [enteredDate, setEnteredDate] = useState(todayDate);
 
   const titleChangeHandler = ({ target }) => {
@@ -26,7 +26,7 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
     };
     onSaveExpenseData(expenseData);
     setEnteredTitle("");
-    setEnteredAmount(0);
+    setEnteredAmount(0.01);
     setEnteredDate(todayDate);
   };
 
