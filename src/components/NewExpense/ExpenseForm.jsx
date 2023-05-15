@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
 const ExpenseForm = ({ onSaveExpenseData }) => {
+  const todayDate = new Date().toISOString().split("T")[0];
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAmount, setEnteredAmount] = useState("");
-  const [enteredDate, setEnteredDate] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState(0);
+  const [enteredDate, setEnteredDate] = useState(todayDate);
 
   const titleChangeHandler = ({ target }) => {
     setEnteredTitle(target.value);
@@ -25,8 +26,8 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
     };
     onSaveExpenseData(expenseData);
     setEnteredTitle("");
-    setEnteredAmount("");
-    setEnteredDate("");
+    setEnteredAmount(0);
+    setEnteredDate(todayDate);
   };
 
   return (
@@ -35,6 +36,7 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
         <div className="new-expense__control">
           <label>Title</label>
           <input
+            required
             type="text"
             value={enteredTitle}
             onChange={titleChangeHandler}
@@ -43,6 +45,7 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
         <div className="new-expense__control">
           <label>Amount</label>
           <input
+            required
             type="number"
             min="0.01"
             step="0.01"
@@ -53,6 +56,7 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
         <div className="new-expense__control">
           <label>Date</label>
           <input
+            required
             type="date"
             min="2019-01-01"
             max="2023-12-31"
