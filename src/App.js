@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ExpensesList from "./components/Expenses/ExpensesList";
 import NewExpense from "./components/NewExpense/NewExpense";
 
@@ -23,11 +24,14 @@ const App = () => {
       date: new Date(2021, 5, 12),
     },
   ];
-
+  const [currentData, setCurrentData] = useState(expenses);
+  const addExpenseHandler = (expense) => {
+    setCurrentData([expense, ...currentData]);
+  };
   return (
     <div>
-      <NewExpense />
-      <ExpensesList expenses={expenses} />
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <ExpensesList items={currentData} />
     </div>
   );
 };
