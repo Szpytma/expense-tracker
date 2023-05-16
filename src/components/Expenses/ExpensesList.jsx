@@ -15,13 +15,13 @@ const ExpenseList = ({ items }) => {
           selectedYear={selectedYear}
           setSelectedYear={setSelectedYear}
         />
-        {items.map((item) => {
+        {items.map((expense) => {
           return (
             <ExpenseItem
-              key={item.id}
-              title={item.title}
-              amount={item.amount}
-              date={item.date}
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
             />
           );
         })}
