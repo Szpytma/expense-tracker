@@ -36,6 +36,7 @@ const DUMMY_EXPENSES = [
 ];
 const App = () => {
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [filteredYear, setFilteredYear] = useState("2023");
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
       return [expense, ...prevExpenses];
@@ -44,8 +45,16 @@ const App = () => {
 
   return (
     <div>
-      <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses} setItems={setExpenses} />
+      <NewExpense
+        onAddExpense={addExpenseHandler}
+        setFilteredYear={setFilteredYear}
+      />
+      <Expenses
+        expenses={expenses}
+        filteredYear={filteredYear}
+        setFilteredYear={setFilteredYear}
+        setExpenses={setExpenses}
+      />
       <Footer />
     </div>
   );

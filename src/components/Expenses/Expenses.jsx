@@ -6,9 +6,8 @@ import { useState } from "react";
 import ExpensesList from "./ExpensesList";
 import ExpensesChart from "./ExpensesChart";
 
-const Expenses = ({ items }) => {
-  const [filteredYear, setFilteredYear] = useState("2021");
-  const filteredExpenses = items.filter((expense) => {
+const Expenses = ({ expenses, filteredYear, setFilteredYear, setExpenses }) => {
+  const filteredExpenses = expenses.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
 
@@ -20,7 +19,7 @@ const Expenses = ({ items }) => {
           setSelectedYear={setFilteredYear}
         />
         <ExpensesChart expenses={filteredExpenses} />
-        <ExpensesList items={filteredExpenses} />
+        <ExpensesList items={filteredExpenses} setExpenses={setExpenses} />
       </Card>
     </div>
   );

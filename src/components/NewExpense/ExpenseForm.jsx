@@ -19,23 +19,18 @@ const ExpenseForm = ({ onSaveExpenseData, onCancel }) => {
   };
 
   const submitHandler = (event) => {
-    if (
-      enteredTitle.trim().length === 0 ||
-      enteredAmount.trim().length === 0 ||
-      enteredDate.trim().length === 0
-    ) {
-      setError({
-        title: "invalid input",
-        message: "please provide title, price and date",
-      });
-      return;
-    }
     event.preventDefault();
+
     const expenseData = {
       title: enteredTitle,
       amount: +enteredAmount,
       date: new Date(enteredDate),
     };
+
+    if (expenseData.title.trim().length === 0) {
+      setError({ title: "Invalid input", message: "provide correct data" });
+      return;
+    }
     onSaveExpenseData(expenseData);
     setEnteredTitle("");
     setEnteredAmount(0.01);
