@@ -1,10 +1,12 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
+import ErrorModal from "../UI/ErrorModal";
 const ExpenseForm = ({ onSaveExpenseData, onCancel }) => {
   const todayDate = new Date().toISOString().split("T")[0];
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState(0.01);
   const [enteredDate, setEnteredDate] = useState(todayDate);
+  const [error, setError] = useState(null);
   const titleChangeHandler = ({ target }) => {
     setEnteredTitle(target.value);
   };
@@ -17,6 +19,17 @@ const ExpenseForm = ({ onSaveExpenseData, onCancel }) => {
   };
 
   const submitHandler = (event) => {
+    if (
+      enteredTitle.trim().length === 0 ||
+      enteredAmount.trim().length === 0 ||
+      enteredDate.trim().length === 0
+    ) {
+      setError({
+        title: "invalid input",
+        message: "please provide title, price and date",
+      });
+      return;
+    }
     event.preventDefault();
     const expenseData = {
       title: enteredTitle,
@@ -29,13 +42,18 @@ const ExpenseForm = ({ onSaveExpenseData, onCancel }) => {
     setEnteredDate(todayDate);
   };
 
-  return (
+  return error ? (
+    <ErrorModal
+      title={error.title}
+      message={error.message}
+      setError={setError}
+    />
+  ) : (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
           <input
-            required
             type="text"
             value={enteredTitle}
             onChange={titleChangeHandler}
@@ -44,7 +62,6 @@ const ExpenseForm = ({ onSaveExpenseData, onCancel }) => {
         <div className="new-expense__control">
           <label>Amount</label>
           <input
-            required
             type="number"
             min="0.01"
             step="0.01"
